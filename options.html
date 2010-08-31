@@ -1,0 +1,37 @@
+<html>
+<head><title>My Test Extension Options</title>
+<script type="text/javascript">
+
+// Saves options to localStorage.
+function save_options() {
+  var api_key = document.getElementById("api-key");
+  localStorage["api-key"] = api_key.value; 
+
+  // Update status to let user know options were saved.
+  var status = document.getElementById("status");
+  status.innerHTML = "Options Saved.";
+  setTimeout(function() {
+    status.innerHTML = "";
+  }, 750);
+}
+
+// Restores select box state to saved value from localStorage.
+function restore_options() {
+  var api_key = localStorage["api-key"];
+  if (!api_key) {
+    return;
+  }
+ var api_box = document.getElementById("api-key");
+ api_box.value = api_key;
+}
+
+</script>
+</head>
+<body onload="restore_options()">
+Your api-key
+<input id="api-key" type="text"> 
+
+<button onclick="save_options()">Save</button>
+<div id="status"></div>
+</body>
+</html>

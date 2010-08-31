@@ -1,0 +1,19 @@
+<html>
+  <head>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+		<script type="text/javascript">
+	    $(document).ready(function() {
+				(chrome.windows.getCurrent(function(w) {
+				  chrome.tabs.getSelected(w.id, function(response) {
+						var url = response.url;
+						$('body').html(url);
+					});
+				}))();
+			});
+		</script>
+  </head>  
+  <body>
+    Hello, Chrome
+	</body>
+
+</html>
