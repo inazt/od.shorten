@@ -6,7 +6,15 @@
 				(chrome.windows.getCurrent(function(w) {
 				  chrome.tabs.getSelected(w.id, function(response) {
 						var url = response.url;
-						$('body').html(url);
+						var service_url = 'http://opd.me/yourls-api.php?signature=c5e178db6d&action=shorturl&format=json&url='
+						var request_url = service_url + url
+						var api_key = localStorage["od-shorten-api-key"];
+						if (!api_key) {
+							return;
+						}
+						$.get(request_url, function(data) {
+							$('body').html(data.message);
+						});
 					});
 				}))();
 			});
