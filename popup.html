@@ -5,13 +5,14 @@
 	    $(document).ready(function() {
 				(chrome.windows.getCurrent(function(w) {
 				  chrome.tabs.getSelected(w.id, function(response) {
-						var url = response.url;
-						var service_url = 'http://opd.me/yourls-api.php?signature=c5e178db6d&action=shorturl&format=json&url='
-						var request_url = service_url + url
 						var api_key = localStorage["od-shorten-api-key"];
-						if (!api_key) {
+						var service_host = localStorage["service-url"]; 
+						if (!api_key||!service_host) {
 							return;
 						}
+						var full_url = encodeURI(response.url);
+						var query = 'yourls-api.php?signature='+ api_key + '&action=shorturl&format=json&url='+ full_url;
+						var request_url = service_host + query;
 						$.get(request_url, function(data) {
 							$('body').html(data.message);
 						});
