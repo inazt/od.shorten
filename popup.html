@@ -3,7 +3,7 @@
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
 		<script type="text/javascript">
 	    $(document).ready(function() {
-				(chrome.windows.getCurrent(function(w) {
+				chrome.windows.getCurrent(function(w) {
 				  chrome.tabs.getSelected(w.id, function(response) {
 						var api_key = localStorage["od-shorten-api-key"];
 						var service_host = localStorage["service-url"]; 
@@ -11,20 +11,18 @@
 							return;
 						}
 						var full_url = encodeURI(response.url);
-						console.log(full_url);
 						var query = 'yourls-api.php?signature='+ api_key + '&action=shorturl&format=json&url='+ full_url;
 						var request_url = service_host + query;
-						console.log(request_url);
 						$.get(request_url, function(data) {
 							if(data.status=='success') {
-								$('#body-result').append("<br>\n" + data.shorturl);
+								$('#body-result').append(data.shorturl);
 							}
 							else {
 								$('body').html(data.message);
 							}
 						});
 					});
-				}))();
+				})
 			});
 		</script>
   </head>  
