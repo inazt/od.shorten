@@ -14,8 +14,7 @@
 	},
 	"permissions": [
 		"tabs",
-		"http://chart.apis.google.com/",
-    "http://ajax.googleapis.com/",
-    "http://opd.me/"
+	        "http://ajax.googleapis.com/",
+                "http://opd.me/"
 	]
 }
