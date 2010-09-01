@@ -5,7 +5,9 @@
 // Saves options to localStorage.
 function save_options() {
   var api_key = document.getElementById("api-key");
+	var api_service = document.getElementById("api-service");
   localStorage["od-shorten-api-key"] = api_key.value; 
+	localStorage["service-url"] = api_service.value;
 
   // Update status to let user know options were saved.
   var status = document.getElementById("status");
@@ -18,19 +20,23 @@ function save_options() {
 // Restores select box state to saved value from localStorage.
 function restore_options() {
   var api_key = localStorage["od-shorten-api-key"];
-  if (!api_key) {
+	var api_service = localStorage["service-url"];
+  if (!api_key||!api_service) {
     return;
   }
  var api_box = document.getElementById("api-key");
+ var service_box = document.getElementById("api-service");
  api_box.value = api_key;
+ service_box.value = api_service;
 }
 
 </script>
 </head>
 <body onload="restore_options()">
+Service URL
+<input id="api-service" type="text"> <br /> 
 Your api-key
 <input id="api-key" type="text"> 
-
 <button onclick="save_options()">Save</button>
 <div id="status"></div>
 </body>
